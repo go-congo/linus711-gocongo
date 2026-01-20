@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_de392a88b5c2b520b28d7c9ed2ac8906 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@master/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_de392a88b5c2b520b28d7c9ed2ac8906" ></div>
+        
+    
+        <div id="legend_aluminium" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Aluminium* (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>9434</span>
+            <span>18200</span>
+            <span>42900</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_argile" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Argile* (%)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.45</span>
+            <span>3.28</span>
+            <span>38.5</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_azote" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Azote* (%)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.04</span>
+            <span>0.07</span>
+            <span>0.15</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_bore" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Bore* (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.05</span>
+            <span>0.10</span>
+            <span>0.24</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_calcium" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Calcium* (Cmol/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.09</span>
+            <span>0.33</span>
+            <span>2.66</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_capacit_d_change_cationique_cec" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Capacité d'échange cationique (CEC)* (Cmol/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.23</span>
+            <span>0.59</span>
+            <span>5.26</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_conductivit_lectrique_25_c" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Conductivité électrique 25°c* (µS/cm)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>4.11</span>
+            <span>7.06</span>
+            <span>15.0</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_cuivre" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Cuivre (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.34</span>
+            <span>0.80</span>
+            <span>2.07</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_fer" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Fer (mg/Kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>21.9</span>
+            <span>63.7</span>
+            <span>140</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_limon" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Limon* (%)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>3.77</span>
+            <span>19.8</span>
+            <span>45.2</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_magn_sium" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Magnésium* (Cmol/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.03</span>
+            <span>0.32</span>
+            <span>1.11</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_mangan_se" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Manganèse* (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>1.01</span>
+            <span>11.1</span>
+            <span>62.8</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_mati_re_organique" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Matière organique* (%)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>1.09</span>
+            <span>3.16</span>
+            <span>5.78</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_phosphore" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Phosphore* (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.01</span>
+            <span>0.65</span>
+            <span>5.38</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_potassium" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Potassium* (Cmol/Kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.03</span>
+            <span>0.06</span>
+            <span>0.25</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_sables" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Sables* (%)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>35.7</span>
+            <span>66.7</span>
+            <span>94.3</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_soufre" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Soufre* (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>270</span>
+            <span>580</span>
+            <span>869</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_zinc" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">Zinc (mg/kg)</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>0.11</span>
+            <span>0.17</span>
+            <span>0.39</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+    
+        <div id="legend_ph_eau" style="
+            position: fixed; 
+            bottom: 30px; left: 30px; 
+            z-index: 9999; 
+            background-color: rgba(255,255,255,0.92);
+            padding: 10px 12px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 6px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+            font-size: 12px;
+            line-height: 1.2;
+            display: none;
+            ">
+          <div style="font-weight: 700; margin-bottom: 6px;">pH eau</div>
+          <div style="width: 200px; height: 12px; background: linear-gradient(to right, blue, lime, red); border: 1px solid rgba(0,0,0,0.2);"></div>
+          <div style="display: flex; justify-content: space-between; width: 200px; margin-top: 4px;">
+            <span>5.10</span>
+            <span>5.46</span>
+            <span>6.29</span>
+          </div>
+          <div style="margin-top: 4px; color: rgba(0,0,0,0.65); font-size: 11px;">
+            min / median / max
+          </div>
+        </div>
+        
+</body>
+<script>
+    
+    
+            var map_de392a88b5c2b520b28d7c9ed2ac8906 = L.map(
+                "map_de392a88b5c2b520b28d7c9ed2ac8906",
+                {
+                    center: [9.60634090909091, -10.543717727272726],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+
+            
+
+        
+    
+            var tile_layer_a4608389b9eab3c3fe44bed76a97c85e = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var tile_layer_b98846ceb685e3d92590c0d6e48cbbef = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var tile_layer_880dfdb60f11a0c6f659fad2e5170ec7 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var tile_layer_e58836ac28bea0cf27305d14808a4e17 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {"attribution": "Esri", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var feature_group_4baf3d89703db6773c95d9da9fe1d6fb = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var rectangle_a740b1ac627e5f709e8730ecfd9753f5 = L.rectangle(
+                [[9.52266, -10.63396], [9.67196, -10.44032]],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#3388ff", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_4baf3d89703db6773c95d9da9fe1d6fb);
+        
+    
+            rectangle_a740b1ac627e5f709e8730ecfd9753f5.bindTooltip(
+                `<div>
+                     Sample area
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_d97f0930a53bd5665f7da84b5330bb6d = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var marker_09da88c488c0ef6443bbeea3fcf33029 = L.marker(
+                [9.52266, -10.57428],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_ce2f9bec22ee7bc0bb02cb726c2ed3b5 = L.popup({"maxWidth": 320});
+
+        
+            var html_289063d899fd570f856e9478166ed14e = $(`<div id="html_289063d899fd570f856e9478166ed14e" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.52266, -10.57428 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 20</b> (0-15)<br>pH eau: 5.28<br>Aluminium*: 13000 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.70 Cmol/kg<br>Matière organique*: 2.22 %</div>         </div>         </div>`)[0];
+            popup_ce2f9bec22ee7bc0bb02cb726c2ed3b5.setContent(html_289063d899fd570f856e9478166ed14e);
+        
+
+        marker_09da88c488c0ef6443bbeea3fcf33029.bindPopup(popup_ce2f9bec22ee7bc0bb02cb726c2ed3b5)
+        ;
+
+        
+    
+    
+            marker_09da88c488c0ef6443bbeea3fcf33029.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ae8456a974df4815198664dd21e7e78f = L.marker(
+                [9.56509, -10.61635],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_a043958fad9d64bbf3b3d3063b89082d = L.popup({"maxWidth": 320});
+
+        
+            var html_e0497644297cdc7acec7908f08d9da40 = $(`<div id="html_e0497644297cdc7acec7908f08d9da40" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.56509, -10.61635 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 12</b> (0-30)<br>pH eau: 5.30<br>Aluminium*: 18200 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.49 Cmol/kg<br>Matière organique*: 4.50 %</div>         </div>         </div>`)[0];
+            popup_a043958fad9d64bbf3b3d3063b89082d.setContent(html_e0497644297cdc7acec7908f08d9da40);
+        
+
+        marker_ae8456a974df4815198664dd21e7e78f.bindPopup(popup_a043958fad9d64bbf3b3d3063b89082d)
+        ;
+
+        
+    
+    
+            marker_ae8456a974df4815198664dd21e7e78f.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_260410e4122faf0b6e0d4386399c5582 = L.marker(
+                [9.56714, -10.5615],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_dbd6eeea04bde05cdefd1e4743e8f471 = L.popup({"maxWidth": 320});
+
+        
+            var html_ecc1a213944705b9a2d30214ee6bb73a = $(`<div id="html_ecc1a213944705b9a2d30214ee6bb73a" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.56714, -10.56150 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 21</b> (0-15)<br>pH eau: 5.26<br>Aluminium*: 16900 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.27 Cmol/kg<br>Matière organique*: 5.30 %</div>         </div>         </div>`)[0];
+            popup_dbd6eeea04bde05cdefd1e4743e8f471.setContent(html_ecc1a213944705b9a2d30214ee6bb73a);
+        
+
+        marker_260410e4122faf0b6e0d4386399c5582.bindPopup(popup_dbd6eeea04bde05cdefd1e4743e8f471)
+        ;
+
+        
+    
+    
+            marker_260410e4122faf0b6e0d4386399c5582.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5aacc815fc0e75f8c5d3e20df22f9b3e = L.marker(
+                [9.56741, -10.4747],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_6c809b40abd3c15a9bb42b5f50098d96 = L.popup({"maxWidth": 320});
+
+        
+            var html_e5abf15b7838d2db53e4efc27ad75e22 = $(`<div id="html_e5abf15b7838d2db53e4efc27ad75e22" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.56741, -10.47470 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 9</b> (0-30)<br>pH eau: 5.15<br>Aluminium*: 42900 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.34 Cmol/kg<br>Matière organique*: 5.78 %</div>         </div>         </div>`)[0];
+            popup_6c809b40abd3c15a9bb42b5f50098d96.setContent(html_e5abf15b7838d2db53e4efc27ad75e22);
+        
+
+        marker_5aacc815fc0e75f8c5d3e20df22f9b3e.bindPopup(popup_6c809b40abd3c15a9bb42b5f50098d96)
+        ;
+
+        
+    
+    
+            marker_5aacc815fc0e75f8c5d3e20df22f9b3e.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_de77318acdcfa32f5e88aaf58045bbf0 = L.marker(
+                [9.56976, -10.44032],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_81d016ca03c5527df5e4b12c51b1cd11 = L.popup({"maxWidth": 320});
+
+        
+            var html_d5f4743159eb55680e9e0a8bcc380a42 = $(`<div id="html_d5f4743159eb55680e9e0a8bcc380a42" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.56976, -10.44032 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 1</b> (0-40)<br>pH eau: 5.10<br>Aluminium*: 9434 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.27 Cmol/kg<br>Matière organique*: 2.83 %</div>         </div>         </div>`)[0];
+            popup_81d016ca03c5527df5e4b12c51b1cd11.setContent(html_d5f4743159eb55680e9e0a8bcc380a42);
+        
+
+        marker_de77318acdcfa32f5e88aaf58045bbf0.bindPopup(popup_81d016ca03c5527df5e4b12c51b1cd11)
+        ;
+
+        
+    
+    
+            marker_de77318acdcfa32f5e88aaf58045bbf0.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f8716609609923615f604f9bbd1e5dc2 = L.marker(
+                [9.57714, -10.57442],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_7c3adb9adb3b5ff31132f3e3d632d8e3 = L.popup({"maxWidth": 320});
+
+        
+            var html_b6edef14d9ccca2483bd89a53f24231f = $(`<div id="html_b6edef14d9ccca2483bd89a53f24231f" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.57714, -10.57442 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 14</b> (0-30)<br>pH eau: 5.26<br>Aluminium*: 13000 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.70 Cmol/kg<br>Matière organique*: 3.18 %</div>         </div>         </div>`)[0];
+            popup_7c3adb9adb3b5ff31132f3e3d632d8e3.setContent(html_b6edef14d9ccca2483bd89a53f24231f);
+        
+
+        marker_f8716609609923615f604f9bbd1e5dc2.bindPopup(popup_7c3adb9adb3b5ff31132f3e3d632d8e3)
+        ;
+
+        
+    
+    
+            marker_f8716609609923615f604f9bbd1e5dc2.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7f65de660d3846d9f7b9bd1e1601ea8a = L.marker(
+                [9.57801, -10.47196],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_106e4691b9013521ad5b6584bca2d02e = L.popup({"maxWidth": 320});
+
+        
+            var html_c6d6a0ff503612f4b8362a257dd7487d = $(`<div id="html_c6d6a0ff503612f4b8362a257dd7487d" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.57801, -10.47196 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 8</b> (0-25)<br>pH eau: 5.50<br>Aluminium*: 18200 mg/kg<br>Capacité d'échange cationique (CEC)*: 3.40 Cmol/kg<br>Matière organique*: 4.61 %</div>         </div>         </div>`)[0];
+            popup_106e4691b9013521ad5b6584bca2d02e.setContent(html_c6d6a0ff503612f4b8362a257dd7487d);
+        
+
+        marker_7f65de660d3846d9f7b9bd1e1601ea8a.bindPopup(popup_106e4691b9013521ad5b6584bca2d02e)
+        ;
+
+        
+    
+    
+            marker_7f65de660d3846d9f7b9bd1e1601ea8a.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b6d61fcb09de35436208f76debe7056e = L.marker(
+                [9.58314, -10.63381],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_755984af666c841d01f2a93597dffd55 = L.popup({"maxWidth": 320});
+
+        
+            var html_2e96fdccb9bb6074fa7729cf678afc04 = $(`<div id="html_2e96fdccb9bb6074fa7729cf678afc04" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.58314, -10.63381 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 11</b> (0-35)<br>pH eau: 5.43<br>Aluminium*: 16900 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.32 Cmol/kg<br>Matière organique*: 3.36 %</div>         </div>         </div>`)[0];
+            popup_755984af666c841d01f2a93597dffd55.setContent(html_2e96fdccb9bb6074fa7729cf678afc04);
+        
+
+        marker_b6d61fcb09de35436208f76debe7056e.bindPopup(popup_755984af666c841d01f2a93597dffd55)
+        ;
+
+        
+    
+    
+            marker_b6d61fcb09de35436208f76debe7056e.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6a9786781d8ee2f2b968575cfcefc6e9 = L.marker(
+                [9.59261, -10.58112],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_3782e0e8aa797ffd3a34248c068e4f89 = L.popup({"maxWidth": 320});
+
+        
+            var html_48c3fb1526d25c63c84afad374cdb306 = $(`<div id="html_48c3fb1526d25c63c84afad374cdb306" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.59261, -10.58112 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 10</b> (0-35)<br>pH eau: 6.20<br>Aluminium*: 27300 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.26 Cmol/kg<br>Matière organique*: 3.69 %</div>         </div>         </div>`)[0];
+            popup_3782e0e8aa797ffd3a34248c068e4f89.setContent(html_48c3fb1526d25c63c84afad374cdb306);
+        
+
+        marker_6a9786781d8ee2f2b968575cfcefc6e9.bindPopup(popup_3782e0e8aa797ffd3a34248c068e4f89)
+        ;
+
+        
+    
+    
+            marker_6a9786781d8ee2f2b968575cfcefc6e9.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5fbe32d4c601c83d94fc0bc746ce4466 = L.marker(
+                [9.59334, -10.46959],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_a1ff44a09667ee04257ac4de90047520 = L.popup({"maxWidth": 320});
+
+        
+            var html_7b3550deb038cc04cc61c344b4823ecd = $(`<div id="html_7b3550deb038cc04cc61c344b4823ecd" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.59334, -10.46959 &nbsp; (n=2)           </div>           <div style='margin-bottom:6px;'><b>ECH 6</b> (0-20)<br>pH eau: 5.39<br>Aluminium*: 14300 mg/kg<br>Capacité d'échange cationique (CEC)*: 1.15 Cmol/kg<br>Matière organique*: 3.14 %</div><div style='margin-bottom:6px;'><b>ECH 7</b> (20-45)<br>pH eau: 6.12<br>Aluminium*: 23400 mg/kg<br>Capacité d'échange cationique (CEC)*: 5.26 Cmol/kg<br>Matière organique*: 1.20 %</div>         </div>         </div>`)[0];
+            popup_a1ff44a09667ee04257ac4de90047520.setContent(html_7b3550deb038cc04cc61c344b4823ecd);
+        
+
+        marker_5fbe32d4c601c83d94fc0bc746ce4466.bindPopup(popup_a1ff44a09667ee04257ac4de90047520)
+        ;
+
+        
+    
+    
+            marker_5fbe32d4c601c83d94fc0bc746ce4466.bindTooltip(
+                `<div>
+                     2 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8f623b77ef1d8377493ccbf87375ffcb = L.marker(
+                [9.61517, -10.48047],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_23280a21d0ef230ac13a0c8fa03261b1 = L.popup({"maxWidth": 320});
+
+        
+            var html_3c5dd30d588f4ea52e1b62d396649295 = $(`<div id="html_3c5dd30d588f4ea52e1b62d396649295" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.61517, -10.48047 &nbsp; (n=2)           </div>           <div style='margin-bottom:6px;'><b>ECH 2</b> (0-15)<br>pH eau: 5.81<br>Aluminium*: 22100 mg/kg<br>Capacité d'échange cationique (CEC)*: 1.56 Cmol/kg<br>Matière organique*: 5.68 %</div><div style='margin-bottom:6px;'><b>ECH 3</b> (15-30)<br>pH eau: 6.01<br>Aluminium*: 11973 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.36 Cmol/kg<br>Matière organique*: 2.20 %</div>         </div>         </div>`)[0];
+            popup_23280a21d0ef230ac13a0c8fa03261b1.setContent(html_3c5dd30d588f4ea52e1b62d396649295);
+        
+
+        marker_8f623b77ef1d8377493ccbf87375ffcb.bindPopup(popup_23280a21d0ef230ac13a0c8fa03261b1)
+        ;
+
+        
+    
+    
+            marker_8f623b77ef1d8377493ccbf87375ffcb.bindTooltip(
+                `<div>
+                     2 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5f37ae76c092b160c40b1e8e818ce815 = L.marker(
+                [9.61656, -10.51358],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_f39d600f408e12bde8f30f8a59adc4e8 = L.popup({"maxWidth": 320});
+
+        
+            var html_efd5606d98a29fed98fc21f6280f308a = $(`<div id="html_efd5606d98a29fed98fc21f6280f308a" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.61656, -10.51358 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 5</b> (0-30)<br>pH eau: 5.34<br>Aluminium*: 28600 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.65 Cmol/kg<br>Matière organique*: 1.37 %</div>         </div>         </div>`)[0];
+            popup_f39d600f408e12bde8f30f8a59adc4e8.setContent(html_efd5606d98a29fed98fc21f6280f308a);
+        
+
+        marker_5f37ae76c092b160c40b1e8e818ce815.bindPopup(popup_f39d600f408e12bde8f30f8a59adc4e8)
+        ;
+
+        
+    
+    
+            marker_5f37ae76c092b160c40b1e8e818ce815.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_04b8fabc327e248f847e08fe57847557 = L.marker(
+                [9.62144, -10.49578],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_c16fe3aecf8b757264c0e387cb8c26cf = L.popup({"maxWidth": 320});
+
+        
+            var html_33c904c3c816a8acd0179b5e569f4e6a = $(`<div id="html_33c904c3c816a8acd0179b5e569f4e6a" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.62144, -10.49578 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 4</b> (0-20)<br>pH eau: 5.63<br>Aluminium*: 36400 mg/kg<br>Capacité d'échange cationique (CEC)*: 1.63 Cmol/kg<br>Matière organique*: 5.73 %</div>         </div>         </div>`)[0];
+            popup_c16fe3aecf8b757264c0e387cb8c26cf.setContent(html_33c904c3c816a8acd0179b5e569f4e6a);
+        
+
+        marker_04b8fabc327e248f847e08fe57847557.bindPopup(popup_c16fe3aecf8b757264c0e387cb8c26cf)
+        ;
+
+        
+    
+    
+            marker_04b8fabc327e248f847e08fe57847557.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c280339b5ff1c5f419b0078e0134314d = L.marker(
+                [9.62866, -10.63396],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_7499ce0b63dc6e64fb28240f9994b3c6 = L.popup({"maxWidth": 320});
+
+        
+            var html_ff691866fd4a425c24050cff68dfa3fd = $(`<div id="html_ff691866fd4a425c24050cff68dfa3fd" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.62866, -10.63396 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 13</b> (0-30)<br>pH eau: 5.27<br>Aluminium*: 13000 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.53 Cmol/kg<br>Matière organique*: 2.54 %</div>         </div>         </div>`)[0];
+            popup_7499ce0b63dc6e64fb28240f9994b3c6.setContent(html_ff691866fd4a425c24050cff68dfa3fd);
+        
+
+        marker_c280339b5ff1c5f419b0078e0134314d.bindPopup(popup_7499ce0b63dc6e64fb28240f9994b3c6)
+        ;
+
+        
+    
+    
+            marker_c280339b5ff1c5f419b0078e0134314d.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a9937512d08f678ab9799bc18cc3e5bb = L.marker(
+                [9.64928, -10.56474],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_2e30d95f2010d2873bcabb7b96a59afd = L.popup({"maxWidth": 320});
+
+        
+            var html_638d8bc669fbec61616c43c2ca9deba9 = $(`<div id="html_638d8bc669fbec61616c43c2ca9deba9" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.64928, -10.56474 &nbsp; (n=2)           </div>           <div style='margin-bottom:6px;'><b>ECH 15</b> (0-15)<br>pH eau: 5.65<br>Aluminium*: 16900 mg/kg<br>Capacité d'échange cationique (CEC)*: 2.69 Cmol/kg<br>Matière organique*: 1.85 %</div><div style='margin-bottom:6px;'><b>ECH 16</b> (15-35)<br>pH eau: 6.29<br>Aluminium*: 20800 mg/kg<br>Capacité d'échange cationique (CEC)*: 1.25 Cmol/kg<br>Matière organique*: 3.71 %</div>         </div>         </div>`)[0];
+            popup_2e30d95f2010d2873bcabb7b96a59afd.setContent(html_638d8bc669fbec61616c43c2ca9deba9);
+        
+
+        marker_a9937512d08f678ab9799bc18cc3e5bb.bindPopup(popup_2e30d95f2010d2873bcabb7b96a59afd)
+        ;
+
+        
+    
+    
+            marker_a9937512d08f678ab9799bc18cc3e5bb.bindTooltip(
+                `<div>
+                     2 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d16f24035eb19de5989c56d50b5269f3 = L.marker(
+                [9.65179, -10.59385],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_d6b2352c043f77e6a017a796a7b37c0e = L.popup({"maxWidth": 320});
+
+        
+            var html_fed76a6cef81bfcf897518cbd5e629b4 = $(`<div id="html_fed76a6cef81bfcf897518cbd5e629b4" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.65179, -10.59385 &nbsp; (n=2)           </div>           <div style='margin-bottom:6px;'><b>ECH 17</b> (0-15)<br>pH eau: 6.28<br>Aluminium*: 18200 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.35 Cmol/kg<br>Matière organique*: 2.61 %</div><div style='margin-bottom:6px;'><b>ECH 18</b> (15-35)<br>pH eau: 5.48<br>Aluminium*: 22100 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.23 Cmol/kg<br>Matière organique*: 3.05 %</div>         </div>         </div>`)[0];
+            popup_d6b2352c043f77e6a017a796a7b37c0e.setContent(html_fed76a6cef81bfcf897518cbd5e629b4);
+        
+
+        marker_d16f24035eb19de5989c56d50b5269f3.bindPopup(popup_d6b2352c043f77e6a017a796a7b37c0e)
+        ;
+
+        
+    
+    
+            marker_d16f24035eb19de5989c56d50b5269f3.bindTooltip(
+                `<div>
+                     2 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_24e78d36815d59cd9747b907b1e77733 = L.marker(
+                [9.65876, -10.60647],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_c7277429a06d0699c4466f10d289376e = L.popup({"maxWidth": 320});
+
+        
+            var html_eecc6f786ab9a1553605ec34e9421544 = $(`<div id="html_eecc6f786ab9a1553605ec34e9421544" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.65876, -10.60647 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 19</b> (0-35)<br>pH eau: 5.87<br>Aluminium*: 16900 mg/kg<br>Capacité d'échange cationique (CEC)*: 0.28 Cmol/kg<br>Matière organique*: 1.09 %</div>         </div>         </div>`)[0];
+            popup_c7277429a06d0699c4466f10d289376e.setContent(html_eecc6f786ab9a1553605ec34e9421544);
+        
+
+        marker_24e78d36815d59cd9747b907b1e77733.bindPopup(popup_c7277429a06d0699c4466f10d289376e)
+        ;
+
+        
+    
+    
+            marker_24e78d36815d59cd9747b907b1e77733.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ca3524478fc3be7ec88e8bddad59d025 = L.marker(
+                [9.67196, -10.56624],
+                {}
+            ).addTo(feature_group_d97f0930a53bd5665f7da84b5330bb6d);
+        
+    
+        var popup_c61221a297e0c3b456dba5b5879b4d3b = L.popup({"maxWidth": 320});
+
+        
+            var html_6eb4eb5551064fc2d4666de25049166d = $(`<div id="html_6eb4eb5551064fc2d4666de25049166d" style="width: 100.0%; height: 100.0%;">         <div style="width: 260px;">           <div style="font-weight:700; margin-bottom:6px;">             Location: 9.67196, -10.56624 &nbsp; (n=1)           </div>           <div style='margin-bottom:6px;'><b>ECH 22</b> (0-20)<br>pH eau: 5.40<br>Aluminium*: 26000 mg/kg<br>Capacité d'échange cationique (CEC)*: 1.54 Cmol/kg<br>Matière organique*: 5.53 %</div>         </div>         </div>`)[0];
+            popup_c61221a297e0c3b456dba5b5879b4d3b.setContent(html_6eb4eb5551064fc2d4666de25049166d);
+        
+
+        marker_ca3524478fc3be7ec88e8bddad59d025.bindPopup(popup_c61221a297e0c3b456dba5b5879b4d3b)
+        ;
+
+        
+    
+    
+            marker_ca3524478fc3be7ec88e8bddad59d025.bindTooltip(
+                `<div>
+                     1 sample(s) at this location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_539442011ae01e11e2e9569380e34782 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_ec8f60b7af22fc538651f37284a52150 = L.heatLayer(
+                [[9.56976, -10.44032, 9434.0], [9.61517, -10.48047, 22100.0], [9.61517, -10.48047, 11973.0], [9.62144, -10.49578, 36400.0], [9.61656, -10.51358, 28600.0], [9.59334, -10.46959, 14300.0], [9.59334, -10.46959, 23400.0], [9.57801, -10.47196, 18200.0], [9.56741, -10.4747, 42900.0], [9.59261, -10.58112, 27300.0], [9.58314, -10.63381, 16900.0], [9.56509, -10.61635, 18200.0], [9.62866, -10.63396, 13000.0], [9.57714, -10.57442, 13000.0], [9.64928, -10.56474, 16900.0], [9.64928, -10.56474, 20800.0], [9.65179, -10.59385, 18200.0], [9.65179, -10.59385, 22100.0], [9.65876, -10.60647, 16900.0], [9.52266, -10.57428, 13000.0], [9.56714, -10.5615, 16900.0], [9.67196, -10.56624, 26000.0]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_539442011ae01e11e2e9569380e34782);
+        
+    
+            var feature_group_cd9fed31af88405b33f47d18a4232d84 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_50f4dc0e30b0b8b864d0a1a40036e10e = L.heatLayer(
+                [[9.56976, -10.44032, 0.99], [9.61517, -10.48047, 2.94], [9.61517, -10.48047, 1.96], [9.62144, -10.49578, 1.89], [9.61656, -10.51358, 1.64], [9.59334, -10.46959, 3.85], [9.59334, -10.46959, 35.71], [9.57801, -10.47196, 3.23], [9.56741, -10.4747, 32.43], [9.59261, -10.58112, 0.45], [9.58314, -10.63381, 3.85], [9.56509, -10.61635, 17.5], [9.62866, -10.63396, 28.57], [9.57714, -10.57442, 2.31], [9.64928, -10.56474, 2.44], [9.64928, -10.56474, 28.57], [9.65179, -10.59385, 13.79], [9.65179, -10.59385, 25.0], [9.65876, -10.60647, 38.46], [9.52266, -10.57428, 3.33], [9.56714, -10.5615, 2.22], [9.67196, -10.56624, 1.82]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_cd9fed31af88405b33f47d18a4232d84);
+        
+    
+            var feature_group_185b9db35b803c68d762f57f40ee859e = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_2ceda7383c8efdb9812ff8640362bcb5 = L.heatLayer(
+                [[9.56976, -10.44032, 0.06], [9.61517, -10.48047, 0.07], [9.61517, -10.48047, 0.05], [9.62144, -10.49578, 0.05], [9.61656, -10.51358, 0.08], [9.59334, -10.46959, 0.08], [9.59334, -10.46959, 0.06], [9.57801, -10.47196, 0.13], [9.56741, -10.4747, 0.07], [9.59261, -10.58112, 0.08], [9.58314, -10.63381, 0.05], [9.56509, -10.61635, 0.06], [9.62866, -10.63396, 0.08], [9.57714, -10.57442, 0.06], [9.64928, -10.56474, 0.05], [9.64928, -10.56474, 0.07], [9.65179, -10.59385, 0.08], [9.65179, -10.59385, 0.04], [9.65876, -10.60647, 0.07], [9.52266, -10.57428, 0.08], [9.56714, -10.5615, 0.06], [9.67196, -10.56624, 0.15]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_185b9db35b803c68d762f57f40ee859e);
+        
+    
+            var feature_group_54cd0ffc5fdf3dc96189e8cb6058f565 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_a2c126bcb481b203b857571eb33daaa9 = L.heatLayer(
+                [[9.56976, -10.44032, 0.14], [9.61517, -10.48047, 0.22], [9.61517, -10.48047, 0.07], [9.62144, -10.49578, 0.17], [9.61656, -10.51358, 0.08], [9.59334, -10.46959, 0.14], [9.57801, -10.47196, 0.16], [9.56741, -10.4747, 0.24], [9.59261, -10.58112, 0.1], [9.58314, -10.63381, 0.16], [9.56509, -10.61635, 0.1], [9.62866, -10.63396, 0.05], [9.57714, -10.57442, 0.06], [9.64928, -10.56474, 0.1], [9.64928, -10.56474, 0.08], [9.65179, -10.59385, 0.07], [9.65179, -10.59385, 0.08], [9.65876, -10.60647, 0.11], [9.52266, -10.57428, 0.06], [9.56714, -10.5615, 0.05], [9.67196, -10.56624, 0.1]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_54cd0ffc5fdf3dc96189e8cb6058f565);
+        
+    
+            var feature_group_fc9b842abf634790693cb722517a234d = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_bd158f40aa01fa17f9f3826d42b6dd28 = L.heatLayer(
+                [[9.56976, -10.44032, 0.24], [9.61517, -10.48047, 1.38], [9.61517, -10.48047, 0.28], [9.62144, -10.49578, 1.5], [9.61656, -10.51358, 0.53], [9.59334, -10.46959, 1.03], [9.59334, -10.46959, 0.27], [9.57801, -10.47196, 2.36], [9.56741, -10.4747, 0.14], [9.59261, -10.58112, 0.09], [9.58314, -10.63381, 0.14], [9.56509, -10.61635, 0.33], [9.62866, -10.63396, 0.32], [9.57714, -10.57442, 0.42], [9.64928, -10.56474, 2.66], [9.64928, -10.56474, 1.09], [9.65179, -10.59385, 0.16], [9.65876, -10.60647, 0.13], [9.52266, -10.57428, 0.38], [9.56714, -10.5615, 0.11], [9.67196, -10.56624, 1.12]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_fc9b842abf634790693cb722517a234d);
+        
+    
+            var feature_group_a746efab5a33f0794f411459a3595163 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_7156de28cf2e827d14943b9b99318c22 = L.heatLayer(
+                [[9.56976, -10.44032, 0.27], [9.61517, -10.48047, 1.56], [9.61517, -10.48047, 0.36], [9.62144, -10.49578, 1.63], [9.61656, -10.51358, 0.65], [9.59334, -10.46959, 1.15], [9.59334, -10.46959, 5.26], [9.57801, -10.47196, 3.4], [9.56741, -10.4747, 0.34], [9.59261, -10.58112, 0.26], [9.58314, -10.63381, 0.32], [9.56509, -10.61635, 0.49], [9.62866, -10.63396, 0.53], [9.57714, -10.57442, 0.7], [9.64928, -10.56474, 2.69], [9.64928, -10.56474, 1.25], [9.65179, -10.59385, 0.35], [9.65179, -10.59385, 0.23], [9.65876, -10.60647, 0.28], [9.52266, -10.57428, 0.7], [9.56714, -10.5615, 0.27], [9.67196, -10.56624, 1.54]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_a746efab5a33f0794f411459a3595163);
+        
+    
+            var feature_group_97208f0e38ec249616bb1544e0925ad2 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_bb87434b0f9d8eb292935c0a01b3908c = L.heatLayer(
+                [[9.56976, -10.44032, 14.98], [9.61517, -10.48047, 7.11], [9.61517, -10.48047, 6.78], [9.62144, -10.49578, 5.01], [9.61656, -10.51358, 11.62], [9.59334, -10.46959, 4.18], [9.59334, -10.46959, 5.26], [9.57801, -10.47196, 11.85], [9.56741, -10.4747, 5.84], [9.59261, -10.58112, 4.66], [9.58314, -10.63381, 8.01], [9.56509, -10.61635, 7.97], [9.62866, -10.63396, 5.18], [9.57714, -10.57442, 12.59], [9.64928, -10.56474, 11.63], [9.64928, -10.56474, 5.09], [9.65179, -10.59385, 7.01], [9.65179, -10.59385, 4.11], [9.65876, -10.60647, 11.74], [9.52266, -10.57428, 7.11], [9.56714, -10.5615, 6.78], [9.67196, -10.56624, 10.39]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_97208f0e38ec249616bb1544e0925ad2);
+        
+    
+            var feature_group_efa05a00ac88d109f42de0798ddd415b = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_9c18e59f5d256eb73e8d45e25d2fc224 = L.heatLayer(
+                [[9.56976, -10.44032, 0.62], [9.61517, -10.48047, 1.88], [9.61517, -10.48047, 0.97], [9.62144, -10.49578, 1.97], [9.61656, -10.51358, 1.51], [9.59334, -10.46959, 1.02], [9.59334, -10.46959, 0.95], [9.57801, -10.47196, 2.07], [9.56741, -10.4747, 1.61], [9.59261, -10.58112, 0.82], [9.58314, -10.63381, 0.65], [9.56509, -10.61635, 0.79], [9.62866, -10.63396, 0.63], [9.57714, -10.57442, 0.57], [9.64928, -10.56474, 1.5], [9.64928, -10.56474, 1.17], [9.65179, -10.59385, 0.5], [9.65179, -10.59385, 0.41], [9.65876, -10.60647, 0.75], [9.52266, -10.57428, 0.34], [9.56714, -10.5615, 0.42], [9.67196, -10.56624, 0.63]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_efa05a00ac88d109f42de0798ddd415b);
+        
+    
+            var feature_group_eb49275a5e5d435484ad1b5a3fa298c8 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_1a7f7ee4b8ceed002150d9b354822eae = L.heatLayer(
+                [[9.56976, -10.44032, 119.31], [9.61517, -10.48047, 85.92], [9.61517, -10.48047, 133.3], [9.62144, -10.49578, 140.38], [9.61656, -10.51358, 128.9], [9.59334, -10.46959, 136.8], [9.59334, -10.46959, 58.6], [9.57801, -10.47196, 116.0], [9.56741, -10.4747, 66.58], [9.59261, -10.58112, 78.51], [9.58314, -10.63381, 75.28], [9.56509, -10.61635, 83.85], [9.62866, -10.63396, 60.77], [9.57714, -10.57442, 59.43], [9.64928, -10.56474, 41.88], [9.64928, -10.56474, 21.89], [9.65179, -10.59385, 58.38], [9.65179, -10.59385, 26.22], [9.65876, -10.60647, 36.56], [9.52266, -10.57428, 27.03], [9.56714, -10.5615, 34.25], [9.67196, -10.56624, 30.84]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_eb49275a5e5d435484ad1b5a3fa298c8);
+        
+    
+            var feature_group_1ae355bcad39c9330c4a5bde6318e68a = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_053e004f18337580dda7f206f28ddc87 = L.heatLayer(
+                [[9.56976, -10.44032, 39.6], [9.61517, -10.48047, 8.82], [9.61517, -10.48047, 19.61], [9.62144, -10.49578, 3.77], [9.61656, -10.51358, 16.39], [9.59334, -10.46959, 38.46], [9.59334, -10.46959, 10.71], [9.57801, -10.47196, 25.09], [9.56741, -10.4747, 8.11], [9.59261, -10.58112, 45.25], [9.58314, -10.63381, 19.23], [9.56509, -10.61635, 20.0], [9.62866, -10.63396, 17.86], [9.57714, -10.57442, 20.57], [9.64928, -10.56474, 24.39], [9.64928, -10.56474, 35.71], [9.65179, -10.59385, 17.24], [9.65179, -10.59385, 12.5], [9.65876, -10.60647, 3.85], [9.52266, -10.57428, 30.0], [9.56714, -10.5615, 31.11], [9.67196, -10.56624, 25.45]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_1ae355bcad39c9330c4a5bde6318e68a);
+        
+    
+            var feature_group_54950c81085fb4956f218876a24ecc8c = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_a6650935d8143a14ea51373a032a8d8b = L.heatLayer(
+                [[9.56976, -10.44032, 0.12], [9.61517, -10.48047, 0.7], [9.61517, -10.48047, 0.15], [9.62144, -10.49578, 0.76], [9.61656, -10.51358, 0.35], [9.59334, -10.46959, 0.59], [9.59334, -10.46959, 0.33], [9.57801, -10.47196, 0.03], [9.56741, -10.4747, 0.3], [9.59261, -10.58112, 0.23], [9.58314, -10.63381, 0.26], [9.56509, -10.61635, 0.31], [9.62866, -10.63396, 0.38], [9.57714, -10.57442, 0.51], [9.64928, -10.56474, 1.11], [9.64928, -10.56474, 0.66], [9.65179, -10.59385, 0.29], [9.65179, -10.59385, 0.23], [9.65876, -10.60647, 0.22], [9.52266, -10.57428, 0.57], [9.56714, -10.5615, 0.23], [9.67196, -10.56624, 0.96]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_54950c81085fb4956f218876a24ecc8c);
+        
+    
+            var feature_group_7add92a25bad575c2d78be41564c6f2c = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_676c645e7f6b70b8e6645e29aa730722 = L.heatLayer(
+                [[9.56976, -10.44032, 18.1], [9.61517, -10.48047, 9.51], [9.61517, -10.48047, 4.84], [9.62144, -10.49578, 24.57], [9.61656, -10.51358, 14.09], [9.59334, -10.46959, 62.84], [9.59334, -10.46959, 18.3], [9.57801, -10.47196, 35.44], [9.56741, -10.4747, 1.37], [9.59261, -10.58112, 2.61], [9.58314, -10.63381, 2.23], [9.56509, -10.61635, 4.0], [9.62866, -10.63396, 8.887], [9.57714, -10.57442, 11.31], [9.64928, -10.56474, 49.35], [9.64928, -10.56474, 19.98], [9.65179, -10.59385, 10.88], [9.65179, -10.59385, 1.82], [9.65876, -10.60647, 21.86], [9.52266, -10.57428, 27.44], [9.56714, -10.5615, 1.01], [9.67196, -10.56624, 5.62]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_7add92a25bad575c2d78be41564c6f2c);
+        
+    
+            var feature_group_5cef59d427d0ccb57577d584e2bb5e54 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_f7d896fd922656dfc5489e13f47b9411 = L.heatLayer(
+                [[9.56976, -10.44032, 2.83], [9.61517, -10.48047, 5.68], [9.61517, -10.48047, 2.2], [9.62144, -10.49578, 5.73], [9.61656, -10.51358, 1.37], [9.59334, -10.46959, 3.14], [9.59334, -10.46959, 1.2], [9.57801, -10.47196, 4.61], [9.56741, -10.4747, 5.78], [9.59261, -10.58112, 3.69], [9.58314, -10.63381, 3.36], [9.56509, -10.61635, 4.5], [9.62866, -10.63396, 2.54], [9.57714, -10.57442, 3.18], [9.64928, -10.56474, 1.85], [9.64928, -10.56474, 3.71], [9.65179, -10.59385, 2.61], [9.65179, -10.59385, 3.05], [9.65876, -10.60647, 1.09], [9.52266, -10.57428, 2.22], [9.56714, -10.5615, 5.3], [9.67196, -10.56624, 5.53]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_5cef59d427d0ccb57577d584e2bb5e54);
+        
+    
+            var feature_group_c9a25ab3bb5cb2ccc4de5286ec4a55e7 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_4304204490217cae83a6f7c3f03bc8c8 = L.heatLayer(
+                [[9.56976, -10.44032, 5.38], [9.61517, -10.48047, 0.69], [9.61517, -10.48047, 0.44], [9.62144, -10.49578, 0.08], [9.61656, -10.51358, 0.18], [9.59334, -10.46959, 0.12], [9.59334, -10.46959, 0.01], [9.57801, -10.47196, 1.0], [9.56741, -10.4747, 0.06], [9.59261, -10.58112, 0.69], [9.58314, -10.63381, 0.2], [9.56509, -10.61635, 0.15], [9.62866, -10.63396, 0.14], [9.57714, -10.57442, 0.8], [9.64928, -10.56474, 0.3], [9.64928, -10.56474, 1.34], [9.65179, -10.59385, 1.36], [9.65179, -10.59385, 0.76], [9.65876, -10.60647, 1.4], [9.52266, -10.57428, 1.37], [9.56714, -10.5615, 0.61], [9.67196, -10.56624, 1.26]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_c9a25ab3bb5cb2ccc4de5286ec4a55e7);
+        
+    
+            var feature_group_7aabab50dd1b1b0abc4aecdba17a0fe0 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_72e9de603fb774a45dd7f995506ea0e6 = L.heatLayer(
+                [[9.56976, -10.44032, 0.03], [9.61517, -10.48047, 0.14], [9.61517, -10.48047, 0.07], [9.62144, -10.49578, 0.08], [9.61656, -10.51358, 0.05], [9.59334, -10.46959, 0.05], [9.59334, -10.46959, 0.06], [9.57801, -10.47196, 0.25], [9.56741, -10.4747, 0.06], [9.59261, -10.58112, 0.05], [9.58314, -10.63381, 0.06], [9.56509, -10.61635, 0.07], [9.62866, -10.63396, 0.07], [9.57714, -10.57442, 0.09], [9.64928, -10.56474, 0.09], [9.64928, -10.56474, 0.06], [9.65179, -10.59385, 0.05], [9.65179, -10.59385, 0.04], [9.65876, -10.60647, 0.04], [9.52266, -10.57428, 0.09], [9.56714, -10.5615, 0.05], [9.67196, -10.56624, 0.15]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_7aabab50dd1b1b0abc4aecdba17a0fe0);
+        
+    
+            var feature_group_04120290a19e13c16e9e30066a6f4d3a = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_a1c82a772679adcb7280e40621025bb2 = L.heatLayer(
+                [[9.56976, -10.44032, 59.41], [9.61517, -10.48047, 88.24], [9.61517, -10.48047, 78.43], [9.62144, -10.49578, 94.34], [9.61656, -10.51358, 81.97], [9.59334, -10.46959, 57.69], [9.59334, -10.46959, 53.57], [9.57801, -10.47196, 71.68], [9.56741, -10.4747, 59.46], [9.59261, -10.58112, 54.3], [9.58314, -10.63381, 76.92], [9.56509, -10.61635, 62.5], [9.62866, -10.63396, 53.57], [9.57714, -10.57442, 77.12], [9.64928, -10.56474, 73.17], [9.64928, -10.56474, 35.71], [9.65179, -10.59385, 68.97], [9.65179, -10.59385, 62.5], [9.65876, -10.60647, 57.69], [9.52266, -10.57428, 66.67], [9.56714, -10.5615, 66.67], [9.67196, -10.56624, 72.73]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_04120290a19e13c16e9e30066a6f4d3a);
+        
+    
+            var feature_group_0ebf35020b92a893ebb88cddfac484fa = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_a5bc584a032075ff5fdf33727ab576f5 = L.heatLayer(
+                [[9.56976, -10.44032, 595.5], [9.61517, -10.48047, 455.1], [9.61517, -10.48047, 602.5], [9.62144, -10.49578, 413.5], [9.61656, -10.51358, 772.6], [9.59334, -10.46959, 868.8], [9.59334, -10.46959, 656.0], [9.57801, -10.47196, 660.3], [9.56741, -10.4747, 316.3], [9.59261, -10.58112, 626.1], [9.58314, -10.63381, 574.9], [9.56509, -10.61635, 346.7], [9.62866, -10.63396, 864.4], [9.57714, -10.57442, 605.0], [9.64928, -10.56474, 739.5], [9.64928, -10.56474, 392.0], [9.65179, -10.59385, 359.5], [9.65179, -10.59385, 493.9], [9.65876, -10.60647, 584.4], [9.52266, -10.57428, 435.6], [9.56714, -10.5615, 269.5], [9.67196, -10.56624, 325.5]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_0ebf35020b92a893ebb88cddfac484fa);
+        
+    
+            var feature_group_c2e0c95f6e684c877157052553a812c5 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_c98a70dbaf90c60330174c5ef947aa96 = L.heatLayer(
+                [[9.56976, -10.44032, 0.13], [9.61517, -10.48047, 0.27], [9.61517, -10.48047, 0.19], [9.62144, -10.49578, 0.2], [9.61656, -10.51358, 0.22], [9.59334, -10.46959, 0.24], [9.59334, -10.46959, 0.13], [9.57801, -10.47196, 0.39], [9.56741, -10.4747, 0.15], [9.59261, -10.58112, 0.14], [9.58314, -10.63381, 0.16], [9.56509, -10.61635, 0.11], [9.62866, -10.63396, 0.14], [9.57714, -10.57442, 0.31], [9.64928, -10.56474, 0.34], [9.64928, -10.56474, 0.26], [9.65179, -10.59385, 0.14], [9.65179, -10.59385, 0.11], [9.65876, -10.60647, 0.15], [9.52266, -10.57428, 0.16], [9.56714, -10.5615, 0.17], [9.67196, -10.56624, 0.27]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_c2e0c95f6e684c877157052553a812c5);
+        
+    
+            var feature_group_5a452c9164adc3a9e3a2df2929d57f15 = L.featureGroup(
+                {}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+        
+    
+            var heat_map_28b05bfa974e6de5e953927b587acf7c = L.heatLayer(
+                [[9.56976, -10.44032, 5.1], [9.61517, -10.48047, 5.81], [9.61517, -10.48047, 6.01], [9.62144, -10.49578, 5.63], [9.61656, -10.51358, 5.34], [9.59334, -10.46959, 5.39], [9.59334, -10.46959, 6.12], [9.57801, -10.47196, 5.5], [9.56741, -10.4747, 5.15], [9.59261, -10.58112, 6.2], [9.58314, -10.63381, 5.43], [9.56509, -10.61635, 5.3], [9.62866, -10.63396, 5.27], [9.57714, -10.57442, 5.26], [9.64928, -10.56474, 5.65], [9.64928, -10.56474, 6.29], [9.65179, -10.59385, 6.28], [9.65179, -10.59385, 5.48], [9.65876, -10.60647, 5.87], [9.52266, -10.57428, 5.28], [9.56714, -10.5615, 5.26], [9.67196, -10.56624, 5.4]],
+                {"blur": 18, "gradient": {"0.0": "blue", "0.5": "lime", "1.0": "red"}, "maxZoom": 16, "minOpacity": 0.25, "radius": 25}
+            ).addTo(feature_group_5a452c9164adc3a9e3a2df2929d57f15);
+        
+    
+            var layer_control_647c4bcbbf7021803222e0b5266bc639 = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_a4608389b9eab3c3fe44bed76a97c85e,
+                    "CartoDB Positron" : tile_layer_b98846ceb685e3d92590c0d6e48cbbef,
+                    "CartoDB Dark" : tile_layer_880dfdb60f11a0c6f659fad2e5170ec7,
+                    "Esri WorldImagery (satellite)" : tile_layer_e58836ac28bea0cf27305d14808a4e17,
+                },
+                overlays :  {
+                    "Sample area (bbox)" : feature_group_4baf3d89703db6773c95d9da9fe1d6fb,
+                    "Samples (grouped by location)" : feature_group_d97f0930a53bd5665f7da84b5330bb6d,
+                    "Heatmap: Aluminium*" : feature_group_539442011ae01e11e2e9569380e34782,
+                    "Heatmap: Argile*" : feature_group_cd9fed31af88405b33f47d18a4232d84,
+                    "Heatmap: Azote*" : feature_group_185b9db35b803c68d762f57f40ee859e,
+                    "Heatmap: Bore*" : feature_group_54cd0ffc5fdf3dc96189e8cb6058f565,
+                    "Heatmap: Calcium*" : feature_group_fc9b842abf634790693cb722517a234d,
+                    "Heatmap: Capacit\u00e9 d\u0027\u00e9change cationique (CEC)*" : feature_group_a746efab5a33f0794f411459a3595163,
+                    "Heatmap: Conductivit\u00e9 \u00e9lectrique 25\u00b0c*" : feature_group_97208f0e38ec249616bb1544e0925ad2,
+                    "Heatmap: Cuivre" : feature_group_efa05a00ac88d109f42de0798ddd415b,
+                    "Heatmap: Fer" : feature_group_eb49275a5e5d435484ad1b5a3fa298c8,
+                    "Heatmap: Limon*" : feature_group_1ae355bcad39c9330c4a5bde6318e68a,
+                    "Heatmap: Magn\u00e9sium*" : feature_group_54950c81085fb4956f218876a24ecc8c,
+                    "Heatmap: Mangan\u00e8se*" : feature_group_7add92a25bad575c2d78be41564c6f2c,
+                    "Heatmap: Mati\u00e8re organique*" : feature_group_5cef59d427d0ccb57577d584e2bb5e54,
+                    "Heatmap: Phosphore*" : feature_group_c9a25ab3bb5cb2ccc4de5286ec4a55e7,
+                    "Heatmap: Potassium*" : feature_group_7aabab50dd1b1b0abc4aecdba17a0fe0,
+                    "Heatmap: Sables*" : feature_group_04120290a19e13c16e9e30066a6f4d3a,
+                    "Heatmap: Soufre*" : feature_group_0ebf35020b92a893ebb88cddfac484fa,
+                    "Heatmap: Zinc" : feature_group_c2e0c95f6e684c877157052553a812c5,
+                    "Heatmap: pH eau" : feature_group_5a452c9164adc3a9e3a2df2929d57f15,
+                },
+            };
+            L.control.layers(
+                layer_control_647c4bcbbf7021803222e0b5266bc639.base_layers,
+                layer_control_647c4bcbbf7021803222e0b5266bc639.overlays,
+                {"autoZIndex": true, "collapsed": false, "position": "topright"}
+            ).addTo(map_de392a88b5c2b520b28d7c9ed2ac8906);
+            tile_layer_b98846ceb685e3d92590c0d6e48cbbef.remove();
+            tile_layer_880dfdb60f11a0c6f659fad2e5170ec7.remove();
+            tile_layer_e58836ac28bea0cf27305d14808a4e17.remove();
+            feature_group_4baf3d89703db6773c95d9da9fe1d6fb.remove();
+            feature_group_539442011ae01e11e2e9569380e34782.remove();
+            feature_group_cd9fed31af88405b33f47d18a4232d84.remove();
+            feature_group_185b9db35b803c68d762f57f40ee859e.remove();
+            feature_group_54cd0ffc5fdf3dc96189e8cb6058f565.remove();
+            feature_group_fc9b842abf634790693cb722517a234d.remove();
+            feature_group_a746efab5a33f0794f411459a3595163.remove();
+            feature_group_97208f0e38ec249616bb1544e0925ad2.remove();
+            feature_group_efa05a00ac88d109f42de0798ddd415b.remove();
+            feature_group_eb49275a5e5d435484ad1b5a3fa298c8.remove();
+            feature_group_1ae355bcad39c9330c4a5bde6318e68a.remove();
+            feature_group_54950c81085fb4956f218876a24ecc8c.remove();
+            feature_group_7add92a25bad575c2d78be41564c6f2c.remove();
+            feature_group_5cef59d427d0ccb57577d584e2bb5e54.remove();
+            feature_group_c9a25ab3bb5cb2ccc4de5286ec4a55e7.remove();
+            feature_group_7aabab50dd1b1b0abc4aecdba17a0fe0.remove();
+            feature_group_04120290a19e13c16e9e30066a6f4d3a.remove();
+            feature_group_0ebf35020b92a893ebb88cddfac484fa.remove();
+            feature_group_c2e0c95f6e684c877157052553a812c5.remove();
+        
+    
+            map_de392a88b5c2b520b28d7c9ed2ac8906.fitBounds(
+                [[9.52266, -10.63396], [9.67196, -10.44032]],
+                {}
+            );
+        
+    
+    (function() {
+      var legendMap = {"Heatmap: Aluminium*": "legend_aluminium", "Heatmap: Argile*": "legend_argile", "Heatmap: Azote*": "legend_azote", "Heatmap: Bore*": "legend_bore", "Heatmap: Calcium*": "legend_calcium", "Heatmap: Capacit\u00e9 d'\u00e9change cationique (CEC)*": "legend_capacit_d_change_cationique_cec", "Heatmap: Conductivit\u00e9 \u00e9lectrique 25\u00b0c*": "legend_conductivit_lectrique_25_c", "Heatmap: Cuivre": "legend_cuivre", "Heatmap: Fer": "legend_fer", "Heatmap: Limon*": "legend_limon", "Heatmap: Magn\u00e9sium*": "legend_magn_sium", "Heatmap: Mangan\u00e8se*": "legend_mangan_se", "Heatmap: Mati\u00e8re organique*": "legend_mati_re_organique", "Heatmap: Phosphore*": "legend_phosphore", "Heatmap: Potassium*": "legend_potassium", "Heatmap: Sables*": "legend_sables", "Heatmap: Soufre*": "legend_soufre", "Heatmap: Zinc": "legend_zinc", "Heatmap: pH eau": "legend_ph_eau"};
+      var lastToggled = null;
+
+      function hideAllLegends() {
+        for (var key in legendMap) {
+          var el = document.getElementById(legendMap[key]);
+          if (el) el.style.display = 'none';
+        }
+      }
+
+      function getOverlayLabels() {
+        return document.querySelectorAll('.leaflet-control-layers-overlays label');
+      }
+
+      function updateLegends() {
+        hideAllLegends();
+        var labels = getOverlayLabels();
+        if (!labels || labels.length === 0) return;
+
+        var checked = [];
+        labels.forEach(function(label) {
+          var input = label.querySelector('input');
+          var name = (label.textContent || '').trim();
+          if (legendMap[name] && input && input.checked) {
+            checked.push(name);
+          }
+        });
+
+        var toShow = null;
+        if (lastToggled && checked.indexOf(lastToggled) !== -1) {
+          toShow = lastToggled;
+        } else if (checked.length > 0) {
+          toShow = checked[checked.length - 1];
+        }
+
+        if (toShow) {
+          var el = document.getElementById(legendMap[toShow]);
+          if (el) el.style.display = 'block';
+        }
+      }
+
+      function initLegendBindings() {
+        var labels = getOverlayLabels();
+        if (!labels || labels.length === 0) {
+          setTimeout(initLegendBindings, 250);
+          return;
+        }
+        labels.forEach(function(label) {
+          var input = label.querySelector('input');
+          var name = (label.textContent || '').trim();
+          if (legendMap[name] && input) {
+            input.addEventListener('change', function() {
+              lastToggled = name;
+              updateLegends();
+            });
+          }
+        });
+        updateLegends();
+      }
+
+      setTimeout(initLegendBindings, 600);
+    })();
+</script>
+</html>
